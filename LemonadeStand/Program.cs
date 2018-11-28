@@ -10,8 +10,9 @@ namespace LemonadeStand
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            Game gameObject = new Game();
+            gameObject.Setup();
+            gameObject.InitializeDay();
         }
     }
 }

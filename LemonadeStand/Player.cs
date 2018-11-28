@@ -8,6 +8,11 @@ namespace LemonadeStand
 {
     class Player : Game
     {
-        double money;
+        public double money;
+
+        public Player(double money)
+        {
+            this.money = money;
+        }
     }
 }

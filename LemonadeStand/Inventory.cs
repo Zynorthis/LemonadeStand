@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Inventory : Player
+    class Inventory
     {
         int lemons;
         int sugar;
         int iceCubes;
         int cups;
+
+        public Inventory(int lemons, int sugar, int iceCubes, int cups)
+        {
+
+        }
     }
+    
 }

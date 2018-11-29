@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Player : Game
+    class Player
     {
         public double money;
 

@@ -8,14 +8,17 @@ namespace LemonadeStand
 {
     class Inventory
     {
-        int lemons;
-        int sugar;
-        int iceCubes;
-        int cups;
+        public int lemons;
+        public int sugar;
+        public int iceCubes;
+        public int cups;
 
         public Inventory(int lemons, int sugar, int iceCubes, int cups)
         {
-
+            this.lemons = lemons;
+            this.sugar = sugar;
+            this.iceCubes = iceCubes;
+            this.cups = cups;
         }
     }
     

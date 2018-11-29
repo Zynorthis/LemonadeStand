@@ -10,9 +10,10 @@ namespace LemonadeStand
     {
         static void Main(string[] args)
         {
-            Game gameObject = new Game();
-            gameObject.Setup();
-            gameObject.InitializeDay();
+            Game gameObject = new Game(0, 0, 0, 20, 0, "Error, Invalid Input: ");
+            Inventory inventory = new Inventory(0, 0, 0, 0);
+            Player player = gameObject.Setup();
+            gameObject.InitializeDay(player, inventory, gameObject);
         }
     }
 }

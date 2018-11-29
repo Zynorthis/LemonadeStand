@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Customer : Game
+    class Customer
     {
         double minExpectedPrice;
         double temptations;
+        
     }
 }

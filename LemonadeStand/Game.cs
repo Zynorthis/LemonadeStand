@@ -8,30 +8,61 @@ namespace LemonadeStand
 {
     class Game
     {
-        int dayCounter;
+        public int dayCounter;
+        public double netProfit;
+        public double dailyProfit;
+        public double startMoney;
+        public double yesterdayStartValue;
         Player player;
         Weather weather;
+        Inventory inventory;
+        public string errorMessage;
 
-//        public Game(int dayCounter, Player player, Weather weather)
-//        {
-//            this.dayCounter = dayCounter;
-//            this.player = player;
-//            this.weather = weather;
-//        }
+        public Game(int dayCounter, double netProfit, double dailyProfit, double startMoney, double yesterdayStartValue, string errorMessage)
+        {
+            this.netProfit = netProfit;
+            this.dailyProfit = dailyProfit;
+            this.dayCounter = dayCounter;
+            this.startMoney = startMoney;
+            this.yesterdayStartValue = yesterdayStartValue;
+            this.errorMessage = errorMessage;
+        }
 
-        public void Setup()
+        public Player Setup()
         {
             dayCounter++;
             Player player = new Player(0);
-            Weather weather = new Weather("none", "none", 0, 0, true);
-            player.money += 20.00;
+            weather = new Weather("none", "none", 0, 0, true);
+            player.money = startMoney;
             weather.Forcast();
             weather.SetActualWeather();
+            return player;
         }
 
-        public void InitializeDay()
+        public void InitializeDay(Player player, Inventory inventory, Game gameObject)
         {
-            // do the loop for the day
+            if (gameObject.yesterdayStartValue == 0)
+            {
+                gameObject.yesterdayStartValue = 20.00;
+            }
+            GUI.BeginningReport(weather, gameObject, player, inventory);
+            int userInput = GUI.MainMenu(gameObject);
+            switch (userInput)
+            {
+                case 1:
+                    GUI.BeginningReport(weather, gameObject, player, inventory);
+                    InitializeDay(player, inventory, gameObject);
+                    break;
+                case 2:
+                    Store.StoreMainMenu(player, inventory);
+                    break;
+                case 3:
+                    break;
+                default:
+                    Console.WriteLine(errorMessage + "Please try again");
+                    InitializeDay(player, inventory, gameObject);
+                    break;
+            }
         }
     }
 }

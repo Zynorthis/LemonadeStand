@@ -13,7 +13,7 @@ namespace LemonadeStand
             Game gameObject = new Game(0, 0, 0, 20, 0, "Error, Invalid Input: ");
             Inventory inventory = new Inventory(0, 0, 0, 0);
             Player player = gameObject.Setup();
-            gameObject.InitializeDay(player, inventory, gameObject);
+            gameObject.InitializeDay(player, inventory);
         }
     }
 }

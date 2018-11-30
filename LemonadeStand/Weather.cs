@@ -77,6 +77,7 @@ namespace LemonadeStand
         {
             actualWeather = forcastWeather;
             actualTemperature = forcastTemperature;
+            System.Threading.Thread.Sleep(20);
             Forcast();
         }
     }

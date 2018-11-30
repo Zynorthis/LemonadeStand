@@ -31,7 +31,7 @@ namespace LemonadeStand
         public Player Setup()
         {
             dayCounter++;
-            Player player = new Player(0);
+            player = new Player(0, "none");
             weather = new Weather("none", "none", 0, 0, true);
             player.money = startMoney;
             weather.Forcast();
@@ -39,19 +39,19 @@ namespace LemonadeStand
             return player;
         }
 
-        public void InitializeDay(Player player, Inventory inventory, Game gameObject)
+        public void InitializeDay(Player player, Inventory inventory)
         {
-            if (gameObject.yesterdayStartValue == 0)
+            if (yesterdayStartValue == 0)
             {
-                gameObject.yesterdayStartValue = 20.00;
+                yesterdayStartValue = 20.00;
             }
-            GUI.BeginningReport(weather, gameObject, player, inventory);
-            int userInput = GUI.MainMenu(gameObject);
+            GUI.BeginningReport(weather, player, inventory, dayCounter, yesterdayStartValue);
+            int userInput = GUI.MainMenu(errorMessage, player);
             switch (userInput)
             {
                 case 1:
-                    GUI.BeginningReport(weather, gameObject, player, inventory);
-                    InitializeDay(player, inventory, gameObject);
+                    GUI.BeginningReport(weather, player, inventory, dayCounter, yesterdayStartValue);
+                    InitializeDay(player, inventory);
                     break;
                 case 2:
                     Store.StoreMainMenu(player, inventory);
@@ -60,7 +60,7 @@ namespace LemonadeStand
                     break;
                 default:
                     Console.WriteLine(errorMessage + "Please try again");
-                    InitializeDay(player, inventory, gameObject);
+                    InitializeDay(player, inventory);
                     break;
             }
         }

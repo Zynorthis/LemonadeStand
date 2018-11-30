@@ -9,10 +9,30 @@ namespace LemonadeStand
     class Player
     {
         public double money;
+        public string userInput;
 
-        public Player(double money)
+        public Player(double money, string userInput)
         {
             this.money = money;
+            this.userInput = userInput;
+        }
+
+        public int InputTest()
+        {
+            string userInput = Console.ReadLine();
+            int testedUserInput;
+            try
+            {
+                testedUserInput = Convert.ToInt32(userInput);
+                return testedUserInput;
+            }
+            catch
+            {
+                Console.Clear();
+                Console.WriteLine("Error: Invalid Input, try again");
+                Console.ReadLine();
+                return testedUserInput = 0;
+            }
         }
     }
 }

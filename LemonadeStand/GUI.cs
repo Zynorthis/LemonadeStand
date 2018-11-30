@@ -11,18 +11,20 @@ namespace LemonadeStand
         public static string[,] startReportUI; // report at the start of a day
         public static string[,] storeUI; // store interface
         public static string[,] endReportUI; // end of the day report (game over will be a cw after this!) netProfit, dailyProfit, yesterdayStartValue
+        public static string[,] purchaseUI;
+        public static string[,] confirmationUI;
 
-        public static void BeginningReport(Weather weather, Game gameObject, Player player, Inventory inventory)
+        public static void BeginningReport(Weather weather, Player player, Inventory inventory, int dayCounter, double yesterdayStartValue)
         {
             Console.Clear();
             startReportUI = new string[,] {
                 { "|-------------------------------------------|" },
-                { "  Day: " + Convert.ToString(gameObject.dayCounter) },
+                { "  Day: " + Convert.ToString(dayCounter) },
                 { "|-------------------------------------------|" },
                 { "  Today's Weather: " + weather.actualWeather + " " + Convert.ToString(weather.actualTemperature) + " " + "°F" },
                 { "  Tomorrow's Weather: " + weather.forcastWeather + " " + Convert.ToString(weather.forcastTemperature) + " " + "°F" },
                 { "      Current Money: $" + player.money},
-                { "      Day to Day Profit: $" + (gameObject.yesterdayStartValue - player.money)},
+                { "      Day to Day Profit: $" + (yesterdayStartValue - player.money)},
                 { "      Net Profit: $" + (player.money - 20)},
                 { "|-------------------------------------------|" },
                 { "  Inventory" },
@@ -39,9 +41,11 @@ namespace LemonadeStand
             Console.ReadLine();
         }
 
-        public static int MainMenu(Game gameObject)
+        public static int MainMenu(string errorMessage, Player player)
         {
             string mainMenu;
+            string userInput;
+            int testedUserInput;
 
             Console.Clear();
 
@@ -54,18 +58,11 @@ namespace LemonadeStand
             mainMenu += "|-------------------------------------------|";
 
             Console.WriteLine(mainMenu);
-            int userInput = 1;
-            try
-            {
-                userInput = Convert.ToInt32(Console.ReadLine());
-            }
-            catch
-            {
-                Console.WriteLine(gameObject.errorMessage + "Please enter 1, 2, or 3 (Not Bananna...)");
-            }
+            testedUserInput = player.InputTest();
+            return testedUserInput;
             
-            return userInput;
         }
+
         public static void StoreGUI(Inventory inventory, Player player, double[] prices)
         {
             Console.Clear();
@@ -86,12 +83,47 @@ namespace LemonadeStand
                 { " Sugar.............." + "100..............." + "(" + prices[2] + ")"},
                 { " Cups..............." + "100..............." + "(" + prices[3] + ")"},
                 { "|-------------------------------------------|" },
+                { "\n" },
+                { "What would you like to buy?" }
             };
             foreach (var item in storeUI)
             {
                 Console.WriteLine(item);
             }
-            Console.ReadLine();
+        }
+
+        public static void PurchaseMenu(string itemString)
+        {
+            Console.Clear();
+            purchaseUI = new string[,]
+            {
+                { "|-------------------------------------------|" },
+                { "                 Check Out                   " },
+                { "|-------------------------------------------|" },
+                { "    How many " + itemString + " would you like to buy?    " },
+                { "|-------------------------------------------|" }
+            };
+            foreach (var item in purchaseUI)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        public static void ConfirmationScreen(int UserInput)
+        {
+            Console.Clear();
+            confirmationUI = new string[,]
+            {
+                { "|-------------------------------------------|" },
+                { "                 Check Out                   " },
+                { "|-------------------------------------------|" },
+                { "    You are about to buy "   },
+                { "|-------------------------------------------|" }
+            };
+            foreach (var item in confirmationUI)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

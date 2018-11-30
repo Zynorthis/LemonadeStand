@@ -15,7 +15,7 @@ namespace LemonadeStand
         public double yesterdayStartValue;
         Player player;
         Weather weather;
-        Inventory inventory;
+        Store store;
         public string errorMessage;
 
         public Game(int dayCounter, double netProfit, double dailyProfit, double startMoney, double yesterdayStartValue, string errorMessage)
@@ -33,6 +33,7 @@ namespace LemonadeStand
             dayCounter++;
             player = new Player(0, "none");
             weather = new Weather("none", "none", 0, 0, true);
+            store = new Store(0,0);
             player.money = startMoney;
             weather.Forcast();
             weather.SetActualWeather();
@@ -54,7 +55,8 @@ namespace LemonadeStand
                     InitializeDay(player, inventory);
                     break;
                 case 2:
-                    Store.StoreMainMenu(player, inventory);
+                    store.StoreMainMenu(player, inventory);
+                    store.Confirmation(player, inventory);
                     break;
                 case 3:
                     break;

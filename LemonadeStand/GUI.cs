@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class GUI
+    static class GUI
     {
         public static string[,] startReportUI; // report at the start of a day
         public static string[,] storeUI; // store interface
         public static string[,] endReportUI; // end of the day report (game over will be a cw after this!) netProfit, dailyProfit, yesterdayStartValue
         public static string[,] purchaseUI;
         public static string[,] confirmationUI;
+
 
         public static void BeginningReport(Weather weather, Player player, Inventory inventory, int dayCounter, double yesterdayStartValue)
         {
@@ -43,12 +44,12 @@ namespace LemonadeStand
 
         public static int MainMenu(string errorMessage, Player player)
         {
-            string mainMenu;
-            string userInput;
+            string mainMenu; 
             int testedUserInput;
 
             Console.Clear();
-
+            // this was another idea I have done in the past to print "GUI" elements to a console
+            // which can be slightly simpler to pull off (imo) but doesn't offer as much control overall.
             mainMenu = "|-------------------------------------------| \n";
             mainMenu += "  What would you like to do? \n";
             mainMenu += "\n";
@@ -109,7 +110,7 @@ namespace LemonadeStand
             }
         }
 
-        public static void ConfirmationScreen(int UserInput)
+        public static void ConfirmationScreen(int UserInput, double subTotal)
         {
             Console.Clear();
             confirmationUI = new string[,]
@@ -117,7 +118,8 @@ namespace LemonadeStand
                 { "|-------------------------------------------|" },
                 { "                 Check Out                   " },
                 { "|-------------------------------------------|" },
-                { "    You are about to buy "   },
+                { "    You are about to buy " + UserInput + " for " + subTotal + "."  },
+                { "              Is this correct?               " },
                 { "|-------------------------------------------|" }
             };
             foreach (var item in confirmationUI)

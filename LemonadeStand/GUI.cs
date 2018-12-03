@@ -62,7 +62,6 @@ namespace LemonadeStand
             Console.WriteLine(mainMenu);
             testedUserInput = player.InputTest();
             return testedUserInput;
-            
         }
 
         public static void StoreGUI(Inventory inventory, Player player, double[] prices)

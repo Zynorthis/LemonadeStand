@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Weather
+    public class Weather
     {
         public string forcastWeather; // weather is the type of day (ex. Sunny, Cloudy, Windy)
         public string actualWeather;

@@ -14,10 +14,11 @@ namespace LemonadeStand
         public double startMoney;
         public double yesterdayStartValue;
         Player player;
-        Weather weather;
+        public Weather weather;
         Store store;
         public string errorMessage;
         public List<int> recipeList = new List<int>() { 0, 0, 0 };
+        public double lemonadePrice;
 
         public Game(int dayCounter, double netProfit, double dailyProfit, double startMoney, double yesterdayStartValue, string errorMessage)
         {
@@ -87,6 +88,8 @@ namespace LemonadeStand
                     }
                     break;
                 case 4: // goes through a day of sales at the stand!
+                    // ---> create customer here <---
+                    DayLoop(inventory, customer, weather);
                     break;
                 default:
                     Console.WriteLine(errorMessage + "Please try again");
@@ -101,13 +104,13 @@ namespace LemonadeStand
             while (i <= 3)
             {
                 i++;
-                string x;
+                string itemReference;
                 int userInput;
                 switch (i)
                 {
                     case 1:
-                        x = "lemons";
-                        GUI.RecipeScreen(inventory, x);
+                        itemReference = "lemons";
+                        GUI.RecipeScreen(inventory, itemReference);
                         userInput = player.InputTest();
                         if (inventory.lemons < userInput)
                         {
@@ -122,8 +125,8 @@ namespace LemonadeStand
                         }
                         break;
                     case 2:
-                        x = "ice cubes";
-                        GUI.RecipeScreen(inventory, x);
+                        itemReference = "ice cubes";
+                        GUI.RecipeScreen(inventory, itemReference);
                         userInput = player.InputTest();
                         if (inventory.lemons < userInput)
                         {
@@ -138,8 +141,8 @@ namespace LemonadeStand
                         }
                         break;
                     case 3:
-                        x = "sugar";
-                        GUI.RecipeScreen(inventory, x);
+                        itemReference = "sugar";
+                        GUI.RecipeScreen(inventory, itemReference);
                         userInput = player.InputTest();
                         if (inventory.lemons < userInput)
                         {
@@ -157,9 +160,21 @@ namespace LemonadeStand
             }
         }
 
-        public void DayLoop(Inventory inventory, Customer customer)
+        public void DayLoop(Inventory inventory, Customer customer, Weather weather)
         {
             // loop each customer object through a sales calculation that determines if they buy lemonade or not
+            Console.Clear();
+            Console.WriteLine("How much would you like to sell each cup for?");
+            lemonadePrice = player.InputTest();
+            if (lemonadePrice == 0)
+            {
+                Console.WriteLine(errorMessage + "Please enter in a valid price");
+                DayLoop(inventory, customer, weather);
+            }
+            else
+            {
+
+            }
         }
     }
 }

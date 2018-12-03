@@ -11,6 +11,7 @@ namespace LemonadeStand
         public static double[] prices;
         public double subTotal;
         public int storeUserInput;
+        public string currentSelectedItem;
 
 
         public Store(double subTotal, int storeUserInput)
@@ -32,26 +33,26 @@ namespace LemonadeStand
             switch (Console.ReadLine().ToLower())
             {
                 case "lemons":
-                    string x = "lemons";
-                    GUI.PurchaseMenu(x);
+                    currentSelectedItem = "lemons";
+                    GUI.PurchaseMenu(currentSelectedItem);
                     storeUserInput = player.InputTest();
                     StoreCalculations(storeUserInput, prices[0], player);
                     return subTotal;
                 case "ice cubes":
-                    string y = "ice cubes";
-                    GUI.PurchaseMenu(y);
+                    currentSelectedItem = "ice cubes";
+                    GUI.PurchaseMenu(currentSelectedItem);
                     storeUserInput = player.InputTest();
                     StoreCalculations(storeUserInput, prices[1], player);
                     return subTotal;
                 case "sugar":
-                    string z = "sugar";
-                    GUI.PurchaseMenu(z);
+                    currentSelectedItem = "sugar";
+                    GUI.PurchaseMenu(currentSelectedItem);
                     storeUserInput = player.InputTest();
                     StoreCalculations(storeUserInput, prices[2], player);
                     return subTotal;
                 case "cups":
-                    string a = "cups";
-                    GUI.PurchaseMenu(a);
+                    currentSelectedItem = "cups";
+                    GUI.PurchaseMenu(currentSelectedItem);
                     storeUserInput = player.InputTest();
                     StoreCalculations(storeUserInput, prices[3], player);
                     return subTotal;
@@ -73,28 +74,52 @@ namespace LemonadeStand
             else
             {
                 GUI.ConfirmationScreen(storeUserInput, subTotal);
-                switch (Console.ReadLine().ToLower())
+                try {
+                    switch (Console.ReadLine().ToLower())
+                    {
+                        case "yes":
+                            player.money = (player.money - subTotal);
+                            switch (currentSelectedItem)
+                            {
+                                case "lemons":
+                                    inventory.lemons = (inventory.lemons + storeUserInput);
+                                    break;
+                                case "ice cubes":
+                                    inventory.iceCubes = (inventory.iceCubes + storeUserInput);
+                                    break;
+                                case "sugar":
+                                    inventory.sugar = (inventory.sugar + storeUserInput);
+                                    break;
+                                case "cups":
+                                    inventory.cups = (inventory.cups + storeUserInput);
+                                    break;
+                                default:
+                                    Console.Clear();
+                                    Console.WriteLine("Error, Failed to add items to players inventory. Please try again.");
+                                    break;
+                            }
+                            break;
+                        case "no":
+                            Console.Clear();
+                            StoreMainMenu(player, inventory);
+                            break;
+                        case "bananna":
+                            Console.Clear();
+                            Console.WriteLine("You can stop with all the banannas now...");
+                            Console.ReadLine();
+                            StoreMainMenu(player, inventory);
+                            break;
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Error, Invalid Input, check spelling and try again.");
+                            Console.ReadLine();
+                            StoreMainMenu(player, inventory);
+                            break;
+                    }
+                }
+                catch
                 {
-                    case "yes":
-                        player.money = (player.money - subTotal);
-                        inventory.
-                        break;
-                    case "no":
-                        Console.Clear();
-                        StoreMainMenu(player, inventory);
-                        break;
-                    case "bananna":
-                        Console.Clear();
-                        Console.WriteLine("You can stop with all the banannas now...");
-                        Console.ReadLine();
-                        StoreMainMenu(player, inventory);
-                        break;
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("Error, Invalid Input, check spelling and try again.");
-                        Console.ReadLine();
-                        StoreMainMenu(player, inventory);
-                        break;
+                    Console.WriteLine("Error, invalid input (Expected Input: String). Please try again.");
                 }
             }
         }

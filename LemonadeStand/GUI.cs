@@ -25,7 +25,7 @@ namespace LemonadeStand
                 { "  Today's Weather: " + weather.actualWeather + " " + Convert.ToString(weather.actualTemperature) + " " + "°F" },
                 { "  Tomorrow's Weather: " + weather.forcastWeather + " " + Convert.ToString(weather.forcastTemperature) + " " + "°F" },
                 { "      Current Money: $" + player.money},
-                { "      Day to Day Profit: $" + (yesterdayStartValue - player.money)},
+                { "      Day to Day Profit: $" + (player.money - yesterdayStartValue)},
                 { "      Net Profit: $" + (player.money - 20)},
                 { "|-------------------------------------------|" },
                 { "  Inventory" },
@@ -55,7 +55,8 @@ namespace LemonadeStand
             mainMenu += "\n";
             mainMenu += "   1) Display Today's Info. \n";
             mainMenu += "   2) Go to the store. \n";
-            mainMenu += "   3) Open the stand up for buisness! \n";
+            mainMenu += "   3) Setup the recipe for your lemonade. \n";
+            mainMenu += "   4) Open the stand up for buisness! \n";
             mainMenu += "|-------------------------------------------|";
 
             Console.WriteLine(mainMenu);
@@ -126,6 +127,48 @@ namespace LemonadeStand
             {
                 Console.WriteLine(item);
             }
+        }
+
+        public static void RecipeScreen(Inventory inventory, string currentItem)
+        {
+            Console.Clear();
+            string recipeMenu;
+
+            recipeMenu = "|-------------------------------------------| \n";
+            recipeMenu += "     1 Pitcher = 10 glasses of Lemonade \n";
+            recipeMenu += "|-------------------------------------------| \n";
+            recipeMenu += "                Recipe Setup\n";
+            recipeMenu += "|-------------------------------------------| \n";
+            recipeMenu += " Current Inventory: \n";
+            recipeMenu += "      Lemons - " + inventory.lemons + "\n";
+            recipeMenu += "      Ice Cubes - " + inventory.iceCubes + "\n";
+            recipeMenu += "      Sugar - " + inventory.sugar + "\n";
+            recipeMenu += "      Cups - " + inventory.cups + "\n";
+            recipeMenu += "|-------------------------------------------| \n";
+            recipeMenu += " \n";
+            recipeMenu += " How many " + currentItem + " would you like to use (per pitcher)? \n";
+
+            Console.WriteLine(recipeMenu);
+        }
+
+        public static void RecipeConfirmation(Inventory inventory)
+        {
+            Console.Clear();
+            string recipeConfirmScreen;
+
+            recipeConfirmScreen = "|-------------------------------------------| \n";
+            recipeConfirmScreen += "            Recipe Confirmation \n";
+            recipeConfirmScreen += "|-------------------------------------------| \n";
+            recipeConfirmScreen += "  You Currently have:\n";
+            recipeConfirmScreen += "       Lemons - " + inventory.lemons + "\n";
+            recipeConfirmScreen += "       Ice Cubes - " + inventory.iceCubes + "\n";
+            recipeConfirmScreen += "       Sugar - " + inventory.sugar + "\n";
+            recipeConfirmScreen += "  being added per pitcher of lemonade. \n";
+            recipeConfirmScreen += "|-------------------------------------------| \n";
+            recipeConfirmScreen += "           Is this what you want? \n";
+            recipeConfirmScreen += "|-------------------------------------------| \n";
+
+            Console.WriteLine(recipeConfirmScreen);
         }
     }
 }

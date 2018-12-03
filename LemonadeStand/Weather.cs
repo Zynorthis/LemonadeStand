@@ -12,15 +12,13 @@ namespace LemonadeStand
         public string actualWeather;
         public int forcastTemperature; // Temperature refers to the actual degree it is that day
         public int actualTemperature;
-        bool isFirstDay;
 
-        public Weather(string forcastWeather, string actualWeather, int forcastTemperature, int actualTemperature, bool isFirstDay)
+        public Weather(string forcastWeather, string actualWeather, int forcastTemperature, int actualTemperature)
         {
             this.forcastWeather = forcastWeather;
             this.actualWeather = actualWeather;
             this.forcastTemperature = forcastTemperature;
             this.actualTemperature = actualTemperature;
-            this.isFirstDay = isFirstDay;
         }
 
         public void Forcast()

@@ -39,13 +39,11 @@ namespace LemonadeStand
             {
                 Console.WriteLine(item);
             }
-            Console.ReadLine();
         }
 
-        public static int MainMenu(string errorMessage, Player player)
+        public static void MainMenu(string errorMessage)
         {
             string mainMenu; 
-            int testedUserInput;
 
             Console.Clear();
             // this was another idea I have done in the past to print "GUI" elements to a console
@@ -60,8 +58,6 @@ namespace LemonadeStand
             mainMenu += "|-------------------------------------------|";
 
             Console.WriteLine(mainMenu);
-            testedUserInput = player.InputTest();
-            return testedUserInput;
         }
 
         public static void StoreGUI(Inventory inventory, Player player, double[] prices)

@@ -30,7 +30,8 @@ namespace LemonadeStand
                 prices[3] = .50; // Cups
 
             GUI.StoreGUI(inventory, player, prices);
-            switch (Console.ReadLine().ToLower())
+            string userInput = player.StringInputTest();
+            switch (userInput)
             {
                 case "lemons":
                     currentSelectedItem = "lemons";

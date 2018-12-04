@@ -19,7 +19,7 @@ namespace LemonadeStand
 
         public int InputTest()
         {
-            string userInput = Console.ReadLine();
+            userInput = Console.ReadLine();
             int testedUserInput;
             try
             {
@@ -30,10 +30,28 @@ namespace LemonadeStand
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error: Invalid Input: try again");
+                Console.WriteLine("Error: Invalid Numarical Input: try again");
                 Console.ResetColor();
                 Console.ReadLine();
                 return testedUserInput = 0;
+            }
+        }
+
+        public string StringInputTest()
+        {
+            try
+            {
+                userInput = Console.ReadLine().ToLower();
+                return userInput;
+            }
+            catch
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Error: Invalid Text Input: try again");
+                Console.ResetColor();
+                Console.ReadLine();
+                return userInput = "Error";
             }
         }
     }

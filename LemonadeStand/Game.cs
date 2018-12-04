@@ -52,11 +52,13 @@ namespace LemonadeStand
                 yesterdayStartValue = 20.00;
             }
             GUI.BeginningReport(weather, player, inventory, dayCounter, yesterdayStartValue);
-            int userInput = GUI.MainMenu(errorMessage, player);
+            Console.WriteLine("\n" + "Press any key to continue.");
+            Console.ReadLine();
+            GUI.MainMenu(errorMessage);
+            int userInput = player.InputTest();
             switch (userInput)
             {
                 case 1: // displays all information that the player needs about weather/inventory/
-                    GUI.BeginningReport(weather, player, inventory, dayCounter, yesterdayStartValue);
                     InitializeDay(player, inventory);
                     break;
                 case 2: // allows player to buy items from the store
@@ -67,7 +69,7 @@ namespace LemonadeStand
                 case 3: // allows player to set a recipe for how much ingrediants they want to use per pitcher of lemonade
                     RecipeSetup(inventory, player);
                     GUI.RecipeConfirmation(inventory);
-                    string playerInput = Console.ReadLine().ToLower();
+                    string playerInput = player.StringInputTest();
                     if (playerInput == "yes")
                     {
                         Console.Clear();
@@ -116,7 +118,7 @@ namespace LemonadeStand
                         itemReference = "lemons";
                         GUI.RecipeScreen(inventory, itemReference);
                         userInput = player.InputTest();
-                        if (inventory.lemons < userInput)
+                        if (inventory.lemons < userInput || inventory.lemons == 0)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
@@ -134,7 +136,7 @@ namespace LemonadeStand
                         itemReference = "ice cubes";
                         GUI.RecipeScreen(inventory, itemReference);
                         userInput = player.InputTest();
-                        if (inventory.lemons < userInput)
+                        if (inventory.iceCubes < userInput || inventory.iceCubes == 0)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
@@ -152,7 +154,7 @@ namespace LemonadeStand
                         itemReference = "sugar";
                         GUI.RecipeScreen(inventory, itemReference);
                         userInput = player.InputTest();
-                        if (inventory.lemons < userInput)
+                        if (inventory.sugar < userInput || inventory.sugar == 0)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
@@ -186,7 +188,22 @@ namespace LemonadeStand
             }
             else
             {
-                customer.Creation(weather);
+                Random rngCustomerCount = new Random();
+                int customerCount = 0;
+                if (weather.actualWeather == "Sunny" || weather.actualWeather == "Partly Cloudy")
+                {
+                    customerCount = rngCustomerCount.Next(50, 101);
+                }
+                else if (weather.actualWeather == "Cloudy" || weather.actualWeather == "Foggy")
+                {
+                    customerCount = rngCustomerCount.Next(30, 86);
+                }
+                while (customerCount <= customerList.Count)
+                {
+                    // building list of customers that will be check if they want to buy lemonade
+                    customer.Creation(weather);
+                    customerList.Add(customer);
+                }
             }
         }
     }

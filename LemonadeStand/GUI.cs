@@ -15,7 +15,7 @@ namespace LemonadeStand
         public static string[,] confirmationUI;
 
 
-        public static void BeginningReport(Weather weather, Player player, Inventory inventory, int dayCounter, double yesterdayStartValue)
+        public static void BeginningReport(Weather weather, Player player, Inventory inventory, int dayCounter, double netProfit)
         {
             Console.Clear();
             startReportUI = new string[,] {
@@ -25,7 +25,7 @@ namespace LemonadeStand
                 { "  Today's Weather: " + weather.actualWeather + " " + Convert.ToString(weather.actualTemperature) + " " + "°F" },
                 { "  Tomorrow's Weather: " + weather.forcastWeather + " " + Convert.ToString(weather.forcastTemperature) + " " + "°F" },
                 { "      Current Money: $" + player.money},
-                { "      Day to Day Profit: $" + (player.money - yesterdayStartValue)},
+                { "      Day to Day Profit: $" + netProfit},
                 { "      Net Profit: $" + (player.money - 20)},
                 { "|-------------------------------------------|" },
                 { "  Inventory" },
@@ -76,9 +76,9 @@ namespace LemonadeStand
                 { "|-------------------------------------------|" },
                 { " Item             Quantity             Price " },
                 { " Lemons............." + "100..............." + "(" + prices[0] + ")"},
-                { " Ice Cubes.........." + "100..............." + "(" + prices[1] + ")"},
+                { " Ice Cubes (x50)...." + "100..............." + "(" + prices[1] + ")"},
                 { " Sugar.............." + "100..............." + "(" + prices[2] + ")"},
-                { " Cups..............." + "100..............." + "(" + prices[3] + ")"},
+                { " Cups (x100)........" + "100..............." + "(" + prices[3] + ")"},
                 { "|-------------------------------------------|" },
                 { "\n" },
                 { "What would you like to buy?" }
@@ -164,6 +164,23 @@ namespace LemonadeStand
             recipeConfirmScreen += "|-------------------------------------------| \n";
 
             Console.WriteLine(recipeConfirmScreen);
+        }
+        public static void EndOfDayReport(Inventory inventory, int salesCounter, double lemonadePrice, double netLoss)
+        {
+            Console.Clear();
+            endReportUI = new string[,]
+            {
+                { "|-------------------------------------------|" },
+                { "              End of Day Report              " },
+                { "|-------------------------------------------|" },
+                { "  Lemonade sold: " + salesCounter },
+                { "  Profit made/lost today: " + ((salesCounter * lemonadePrice) - netLoss) },
+                { "|-------------------------------------------|" }
+            };
+            foreach (var item in endReportUI)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

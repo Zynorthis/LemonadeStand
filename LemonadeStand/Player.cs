@@ -17,13 +17,33 @@ namespace LemonadeStand
             this.userInput = userInput;
         }
 
-        public int InputTest()
+        public int IntInputTest()
         {
             userInput = Console.ReadLine();
             int testedUserInput;
             try
             {
                 testedUserInput = Convert.ToInt32(userInput);
+                return testedUserInput;
+            }
+            catch
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Error: Invalid Numarical Input: try again");
+                Console.ResetColor();
+                Console.ReadLine();
+                return testedUserInput = 0;
+            }
+        }
+
+        public double DoubleInputTest()
+        {
+            userInput = Console.ReadLine();
+            double testedUserInput;
+            try
+            {
+                testedUserInput = Convert.ToDouble(userInput);
                 return testedUserInput;
             }
             catch

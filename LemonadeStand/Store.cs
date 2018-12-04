@@ -20,9 +20,8 @@ namespace LemonadeStand
             this.storeUserInput = storeUserInput;
         }
 
-        public double StoreMainMenu(Player player, Inventory inventory)
+        public void StoreMainMenu(Player player, Inventory inventory)
         {
-            double subTotal = 0;
             prices = new double[4];
                 prices[0] = .25; // Lemon
                 prices[1] = .5; // Ice Cubes
@@ -36,39 +35,39 @@ namespace LemonadeStand
                 case "lemons":
                     currentSelectedItem = "lemons";
                     GUI.PurchaseMenu(currentSelectedItem);
-                    storeUserInput = player.InputTest();
+                    storeUserInput = player.IntInputTest();
                     StoreCalculations(storeUserInput, prices[0], player);
-                    return subTotal;
+                    break;
                 case "ice cubes":
-                    currentSelectedItem = "ice cubes";
+                    currentSelectedItem = "ice cubes (x50)";
                     GUI.PurchaseMenu(currentSelectedItem);
-                    storeUserInput = player.InputTest();
+                    storeUserInput = player.IntInputTest();
                     StoreCalculations(storeUserInput, prices[1], player);
-                    return subTotal;
+                    break;
                 case "sugar":
                     currentSelectedItem = "sugar";
                     GUI.PurchaseMenu(currentSelectedItem);
-                    storeUserInput = player.InputTest();
+                    storeUserInput = player.IntInputTest();
                     StoreCalculations(storeUserInput, prices[2], player);
-                    return subTotal;
+                    break;
                 case "cups":
-                    currentSelectedItem = "cups";
+                    currentSelectedItem = "cups (x100)";
                     GUI.PurchaseMenu(currentSelectedItem);
-                    storeUserInput = player.InputTest();
+                    storeUserInput = player.IntInputTest();
                     StoreCalculations(storeUserInput, prices[3], player);
-                    return subTotal;
+                    break;
                 case "bananna":
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("BANANNA IS NO INGREDIANT ON MY LIST NEVIN!");
                     Console.ResetColor();
                     Console.ReadLine();
-                    return 0;
+                    break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("That is not a valid option, check spelling and please try again");
                     Console.ReadLine();
                     Console.ResetColor();
-                    return 0;
+                    break;
             }
         }
         public void Confirmation(Player player, Inventory inventory) {
@@ -89,14 +88,14 @@ namespace LemonadeStand
                                 case "lemons":
                                     inventory.lemons = (inventory.lemons + storeUserInput);
                                     break;
-                                case "ice cubes":
-                                    inventory.iceCubes = (inventory.iceCubes + storeUserInput);
+                                case "ice cubes (x50)":
+                                    inventory.iceCubes = (inventory.iceCubes + (storeUserInput * 50));
                                     break;
                                 case "sugar":
                                     inventory.sugar = (inventory.sugar + storeUserInput);
                                     break;
-                                case "cups":
-                                    inventory.cups = (inventory.cups + storeUserInput);
+                                case "cups (x100)":
+                                    inventory.cups = (inventory.cups + (storeUserInput * 100));
                                     break;
                                 default:
                                     Console.Clear();

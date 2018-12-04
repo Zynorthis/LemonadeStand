@@ -13,12 +13,14 @@ namespace LemonadeStand
         public double dailyProfit;
         public double startMoney;
         public double yesterdayStartValue;
-        Player player;
-        public Weather weather;
-        Store store;
         public string errorMessage;
-        public List<int> recipeList = new List<int>() { 0, 0, 0 };
         public double lemonadePrice;
+        public Weather weather;
+        public Player player;
+        public Store store;
+        public Customer customer;
+        public List<int> recipeList = new List<int>() { 0, 0, 0 };
+        public List<Customer> customerList = new List<Customer>();
 
         public Game(int dayCounter, double netProfit, double dailyProfit, double startMoney, double yesterdayStartValue, string errorMessage)
         {
@@ -36,6 +38,7 @@ namespace LemonadeStand
             player = new Player(0, "none");
             weather = new Weather("none", "none", 0, 0);
             store = new Store(0,0);
+            customer = new Customer(0, 0);
             player.money = startMoney;
             weather.Forcast();
             weather.SetActualWeather();
@@ -82,13 +85,14 @@ namespace LemonadeStand
                     else
                     {
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(errorMessage + "Recipe Setup Cancelled.");
                         Console.ReadLine();
+                        Console.ResetColor();
                         InitializeDay(player, inventory);
                     }
                     break;
                 case 4: // goes through a day of sales at the stand!
-                    // ---> create customer here <---
                     DayLoop(inventory, customer, weather);
                     break;
                 default:
@@ -115,8 +119,10 @@ namespace LemonadeStand
                         if (inventory.lemons < userInput)
                         {
                             Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You don't have enough lemons to make even 1 pitcher!");
                             Console.WriteLine("You will have 0 per pitcher being added.");
+                            Console.ResetColor();
                             Console.ReadLine();
                         }
                         else
@@ -131,9 +137,11 @@ namespace LemonadeStand
                         if (inventory.lemons < userInput)
                         {
                             Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You don't have enough ice cubes to make even 1 pitcher!");
                             Console.WriteLine("You will have 0 per pitcher being added.");
                             Console.ReadLine();
+                            Console.ResetColor();
                         }
                         else
                         {
@@ -147,9 +155,11 @@ namespace LemonadeStand
                         if (inventory.lemons < userInput)
                         {
                             Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You don't have enough sugar to make even 1 pitcher!");
                             Console.WriteLine("You will have 0 per pitcher being added.");
                             Console.ReadLine();
+                            Console.ResetColor();
                         }
                         else
                         {
@@ -168,12 +178,15 @@ namespace LemonadeStand
             lemonadePrice = player.InputTest();
             if (lemonadePrice == 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(errorMessage + "Please enter in a valid price");
+                Console.ReadLine();
+                Console.ResetColor();
                 DayLoop(inventory, customer, weather);
             }
             else
             {
-
+                customer.Creation(weather);
             }
         }
     }

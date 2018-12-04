@@ -29,7 +29,9 @@ namespace LemonadeStand
             catch
             {
                 Console.Clear();
-                Console.WriteLine("Error: Invalid Input, try again");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Error: Invalid Input: try again");
+                Console.ResetColor();
                 Console.ReadLine();
                 return testedUserInput = 0;
             }

@@ -42,8 +42,10 @@ namespace LemonadeStand
                     forcastWeather = "Foggy";
                     break;
                 default:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Something Went Horribly Wrong...");
                     Console.WriteLine("Invalid Weather Roll");
+                    Console.ResetColor();
                     Forcast();
                     break;
             }
@@ -53,20 +55,22 @@ namespace LemonadeStand
             {
                 Random rngHotTemperature = new Random();
                 int temperatureRoll = rngHotTemperature.Next(75, 96);
-                Console.WriteLine("(devTesting) Temperature Roll: " + temperatureRoll);
+                // Console.WriteLine("(devTesting) Temperature Roll: " + temperatureRoll);
                 forcastTemperature = temperatureRoll;
             }
             else if (forcastWeather == "Cloudy" || forcastWeather == "Foggy")
             {
                 Random rngColdTemperature = new Random();
                 int temperatureRoll = rngColdTemperature.Next(55, 75);
-                Console.WriteLine("(devTesting) Temperature Roll: " + temperatureRoll);
+                // Console.WriteLine("(devTesting) Temperature Roll: " + temperatureRoll);
                 forcastTemperature = temperatureRoll;
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Something Went Horribly Wrong...");
                 Console.WriteLine("Invalid Temperature");
+                Console.ResetColor();
                 Forcast();
             }
         }

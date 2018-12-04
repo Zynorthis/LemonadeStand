@@ -8,12 +8,12 @@ namespace LemonadeStand
 {
     public abstract class Consumer
     {
-        public double minExpectedPrice;
+        public double maxExpectedPrice;
         public double temptation;
 
-        public Consumer(double minExpectedPrice, double temptation)
+        public Consumer(double maxExpectedPrice, double temptation)
         {
-            this.minExpectedPrice = minExpectedPrice;
+            this.maxExpectedPrice = maxExpectedPrice;
             this.temptation = temptation;
         }
 

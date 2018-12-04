@@ -57,12 +57,16 @@ namespace LemonadeStand
                     StoreCalculations(storeUserInput, prices[3], player);
                     return subTotal;
                 case "bananna":
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("BANANNA IS NO INGREDIANT ON MY LIST NEVIN!");
+                    Console.ResetColor();
                     Console.ReadLine();
                     return 0;
                 default:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("That is not a valid option, check spelling and please try again");
                     Console.ReadLine();
+                    Console.ResetColor();
                     return 0;
             }
         }
@@ -95,7 +99,9 @@ namespace LemonadeStand
                                     break;
                                 default:
                                     Console.Clear();
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Error, Failed to add items to players inventory. Please try again.");
+                                    Console.ResetColor();
                                     break;
                             }
                             break;
@@ -111,7 +117,9 @@ namespace LemonadeStand
                             break;
                         default:
                             Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Error, Invalid Input, check spelling and try again.");
+                            Console.ResetColor();
                             Console.ReadLine();
                             StoreMainMenu(player, inventory);
                             break;
@@ -119,7 +127,9 @@ namespace LemonadeStand
                 }
                 catch
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Error, invalid input (Expected Input: String). Please try again.");
+                    Console.ResetColor();
                 }
             }
         }
@@ -128,8 +138,10 @@ namespace LemonadeStand
             if ((storeUserInput * itemPrice) > player.money)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You don't have enough money to cover the expenses");
                 Console.ReadLine();
+                Console.ResetColor();
                 subTotal = 0;
                 return subTotal;
             }

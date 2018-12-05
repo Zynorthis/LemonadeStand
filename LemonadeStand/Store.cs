@@ -23,10 +23,10 @@ namespace LemonadeStand
         public void StoreMainMenu(Player player, Inventory inventory)
         {
             prices = new double[4];
-                prices[0] = .25; // Lemon
-                prices[1] = .5; // Ice Cubes
-                prices[2] = .20; // Sugar
-                prices[3] = .50; // Cups
+                prices[0] = 0.25; // Lemon
+                prices[1] = 0.50; // Ice Cubes
+                prices[2] = 0.20; // Sugar
+                prices[3] = 0.50; // Cups
 
             GUI.StoreGUI(inventory, player, prices);
             string userInput = player.StringInputTest();
@@ -60,13 +60,13 @@ namespace LemonadeStand
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("BANANNA IS NO INGREDIANT ON MY LIST NEVIN!");
                     Console.ResetColor();
-                    Console.ReadLine();
+                    Console.ReadKey();
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("That is not a valid option, check spelling and please try again");
-                    Console.ReadLine();
                     Console.ResetColor();
+                    Console.ReadKey();
                     break;
             }
         }
@@ -102,6 +102,7 @@ namespace LemonadeStand
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Error, Failed to add items to players inventory. Please try again.");
                                     Console.ResetColor();
+                                    Console.ReadKey();
                                     break;
                             }
                             break;
@@ -112,7 +113,7 @@ namespace LemonadeStand
                         case "bananna":
                             Console.Clear();
                             Console.WriteLine("You can stop with all the banannas now...");
-                            Console.ReadLine();
+                            Console.ReadKey();
                             StoreMainMenu(player, inventory);
                             break;
                         default:
@@ -120,7 +121,7 @@ namespace LemonadeStand
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Error, Invalid Input, check spelling and try again.");
                             Console.ResetColor();
-                            Console.ReadLine();
+                            Console.ReadKey();
                             StoreMainMenu(player, inventory);
                             break;
                     }
@@ -130,6 +131,7 @@ namespace LemonadeStand
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Error, invalid input (Expected Input: String). Please try again.");
                     Console.ResetColor();
+                    Console.ReadKey();
                 }
             }
         }
@@ -140,8 +142,8 @@ namespace LemonadeStand
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You don't have enough money to cover the expenses");
-                Console.ReadLine();
                 Console.ResetColor();
+                Console.ReadKey();
                 subTotal = 0;
                 return subTotal;
             }

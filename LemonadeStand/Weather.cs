@@ -26,7 +26,7 @@ namespace LemonadeStand
             // decides weather type for the day
             Random rngWeather = new Random();
             int weatherRoll = rngWeather.Next(1, 5);
-            Console.WriteLine("(devTesting) Weather Roll: " + weatherRoll);
+            // Console.WriteLine("(devTesting) Weather Roll: " + weatherRoll);
             switch (weatherRoll)
             {
                 case 1:
@@ -43,9 +43,9 @@ namespace LemonadeStand
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Something Went Horribly Wrong...");
-                    Console.WriteLine("Invalid Weather Roll");
+                    Console.WriteLine("Something Went Horribly Wrong..." + "\n" + "Invalid Weather Roll");
                     Console.ResetColor();
+                    Console.ReadKey();
                     Forcast();
                     break;
             }
@@ -68,9 +68,9 @@ namespace LemonadeStand
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Something Went Horribly Wrong...");
-                Console.WriteLine("Invalid Temperature");
+                Console.WriteLine("Something Went Horribly Wrong..." + "\n" + "Invalid Temperature");
                 Console.ResetColor();
+                Console.ReadKey();
                 Forcast();
             }
         }

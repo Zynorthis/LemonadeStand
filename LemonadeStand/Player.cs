@@ -32,7 +32,7 @@ namespace LemonadeStand
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error: Invalid Numarical Input: try again");
                 Console.ResetColor();
-                Console.ReadLine();
+                Console.ReadKey();
                 return testedUserInput = 0;
             }
         }
@@ -52,7 +52,7 @@ namespace LemonadeStand
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error: Invalid Numarical Input: try again");
                 Console.ResetColor();
-                Console.ReadLine();
+                Console.ReadKey();
                 return testedUserInput = 0;
             }
         }
@@ -70,7 +70,7 @@ namespace LemonadeStand
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error: Invalid Text Input: try again");
                 Console.ResetColor();
-                Console.ReadLine();
+                Console.ReadKey();
                 return userInput = "Error";
             }
         }

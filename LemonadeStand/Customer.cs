@@ -24,7 +24,7 @@ namespace LemonadeStand
             {
                 Random rngExpectedPrice = new Random();
                 int priceRoll = rngExpectedPrice.Next(1,101);
-                Console.WriteLine("(devTesting) ExpectedPriceRoll: " + priceRoll);
+                // Console.WriteLine("(devTesting) ExpectedPriceRoll: " + priceRoll);
                 System.Threading.Thread.Sleep(20);
                 if (priceRoll >= 90)
                 {
@@ -52,14 +52,14 @@ namespace LemonadeStand
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Something has gone horribly wrong: ExpectedPriceRoll Exception.");
                     Console.ResetColor();
-                    Console.ReadLine();
+                    Console.ReadKey();
                 }
             }
             else if (weather.actualTemperature < 72)
             {
                 Random rngExpectedPrice = new Random();
                 int priceRoll = rngExpectedPrice.Next(1, 101);
-                Console.WriteLine("(devTesting) ExpectedPriceRoll: " + priceRoll);
+                // Console.WriteLine("(devTesting) ExpectedPriceRoll: " + priceRoll);
                 System.Threading.Thread.Sleep(20);
                 if (priceRoll >= 90)
                 {
@@ -87,7 +87,7 @@ namespace LemonadeStand
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Something has gone horribly wrong: ExpectedPriceRoll Exception.");
                     Console.ResetColor();
-                    Console.ReadLine();
+                    Console.ReadKey();
                 }
             }
             else
@@ -96,7 +96,7 @@ namespace LemonadeStand
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Something has gone horribly wrong: Could not alter Expected Minimum Price Value successfully.");
                 Console.ResetColor();
-                Console.ReadLine();
+                Console.ReadKey();
             }
 
             if (weather.actualWeather == "Sunny" || weather.actualWeather == "Partly Cloudy")
@@ -113,7 +113,7 @@ namespace LemonadeStand
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Something has gone horribly wrong: Could not alter temptation successfully.");
                 Console.ResetColor();
-                Console.ReadLine();
+                Console.ReadKey();
             }
         }
     }

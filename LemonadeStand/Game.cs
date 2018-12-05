@@ -51,9 +51,14 @@ namespace LemonadeStand
             {
                 yesterdayStartValue = 20.00;
             }
+            if (dayCounter > 7)
+            {
+                Console.WriteLine("Game over!");
+                Console.ReadKey();
+            }
             GUI.BeginningReport(weather, player, inventory, dayCounter, netProfit);
             Console.WriteLine("\n" + "Press any key to continue.");
-            Console.ReadLine();
+            Console.ReadKey();
             GUI.MainMenu(errorMessage);
             int userInput = player.IntInputTest();
             switch (userInput)
@@ -74,14 +79,14 @@ namespace LemonadeStand
                     {
                         Console.Clear();
                         Console.WriteLine("Recipe Set!");
-                        Console.ReadLine();
+                        Console.ReadKey();
                         InitializeDay(player, inventory);
                     }
                     else if (playerInput == "no")
                     {
                         Console.Clear();
                         Console.WriteLine("Recipe Setup Cancelled.");
-                        Console.ReadLine();
+                        Console.ReadKey();
                         InitializeDay(player, inventory);
                     }
                     else
@@ -89,7 +94,7 @@ namespace LemonadeStand
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(errorMessage + "Recipe Setup Cancelled.");
-                        Console.ReadLine();
+                        Console.ReadKey();
                         Console.ResetColor();
                         InitializeDay(player, inventory);
                     }
@@ -99,6 +104,7 @@ namespace LemonadeStand
                     break;
                 default:
                     Console.WriteLine(errorMessage + "Please try again");
+                    Console.ReadKey();
                     InitializeDay(player, inventory);
                     break;
             }
@@ -125,7 +131,7 @@ namespace LemonadeStand
                             Console.WriteLine("You don't have enough lemons to make even 1 pitcher!");
                             Console.WriteLine("You will have 0 per pitcher being added.");
                             Console.ResetColor();
-                            Console.ReadLine();
+                            Console.ReadKey();
                         }
                         else
                         {
@@ -142,7 +148,7 @@ namespace LemonadeStand
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You don't have enough ice cubes to make even 1 pitcher!");
                             Console.WriteLine("You will have 0 per pitcher being added.");
-                            Console.ReadLine();
+                            Console.ReadKey();
                             Console.ResetColor();
                         }
                         else
@@ -160,7 +166,7 @@ namespace LemonadeStand
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You don't have enough sugar to make even 1 pitcher!");
                             Console.WriteLine("You will have 0 per pitcher being added.");
-                            Console.ReadLine();
+                            Console.ReadKey();
                             Console.ResetColor();
                         }
                         else
@@ -182,7 +188,7 @@ namespace LemonadeStand
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(errorMessage + "Please enter in a valid price");
-                Console.ReadLine();
+                Console.ReadKey();
                 Console.ResetColor();
                 InitializeDay(player, inventory);
             }
@@ -190,7 +196,7 @@ namespace LemonadeStand
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(errorMessage + "one or more ingrediants are not set.");
-                Console.ReadLine();
+                Console.ReadKey();
                 Console.ResetColor();
                 DayLoop(inventory, weather);
             }
@@ -206,6 +212,7 @@ namespace LemonadeStand
                 {
                     customerCount = rngCustomerCount.Next(30, 86);
                 }
+                Console.WriteLine("Building Customer List, please wait...");
                 while (customerCount >= customerList.Count)
                 {
                     // building list of customers that will be check if they want to buy lemonade
@@ -213,6 +220,7 @@ namespace LemonadeStand
                     customer.Creation(weather);
                     customerList.Add(customer);
                 }
+                Console.WriteLine("Customer List completed.");
                 foreach (var item in customerList)
                 {
                     if (item.maxExpectedPrice <= lemonadePrice)
@@ -234,19 +242,19 @@ namespace LemonadeStand
                     }
                 }
                 // math below is calculating the netLoss based on ingrediants used during the day
-                var pitchersMade = Math.Floor((Convert.ToDecimal(salesCounter)) / 10);
+                var pitchersMade = Math.Ceiling((Convert.ToDecimal(salesCounter)) / 10);
                 double lemonsUsed;
                 double iceCubesUsed;
                 double sugarUsed;
                 lemonsUsed = (recipeList[0] * Convert.ToInt32(pitchersMade));
                 iceCubesUsed = (recipeList[1] * Convert.ToInt32(pitchersMade));
                 sugarUsed = (recipeList[2] * Convert.ToInt32(pitchersMade));
-                netLoss = ((lemonsUsed * 0.25) + (Convert.ToDouble(Math.Floor((Convert.ToDecimal(iceCubesUsed)) / 50)) * 0.50) + (sugarUsed * 0.20));
+                netLoss = ((lemonsUsed * 0.25) + (Convert.ToDouble(Math.Ceiling((Convert.ToDecimal(iceCubesUsed)) / 50)) * 0.50) + (sugarUsed * 0.20));
                 netProfit = ((salesCounter * lemonadePrice) - netLoss);
 
                 GUI.EndOfDayReport(inventory, salesCounter, lemonadePrice, netLoss);
                 Console.WriteLine("\n" + "Press any key to continue.");
-                Console.ReadLine();
+                Console.ReadKey();
             }
             dayCounter++;
             InitializeDay(player, inventory);
